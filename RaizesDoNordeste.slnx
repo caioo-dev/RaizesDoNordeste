@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/1. Presentation/">
+    <Project Path="src/RaizesDoNordeste.Server/RaizesDoNordeste.Server.csproj" />
+  </Folder>
+  <Folder Name="/2. Application/">
+    <Project Path="src/RaizesDoNordeste.Application/RaizesDoNordeste.Application.csproj" />
+  </Folder>
+  <Folder Name="/3. Domain/">
+    <Project Path="src/RaizesDoNordeste.Domain/RaizesDoNordeste.Domain.csproj" />
+  </Folder>
+  <Folder Name="/4. Infrastructure/">
+    <Project Path="src/RaizesDoNordeste.Infrastructure/RaizesDoNordeste.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/5. CrossCutting/">
+    <Project Path="src/RaizesDoNordeste.CrossCutting/RaizesDoNordeste.CrossCutting.csproj" Id="762e3e77-03ac-4f03-8d20-f1fd736f61b3" />
+  </Folder>
+</Solution>
