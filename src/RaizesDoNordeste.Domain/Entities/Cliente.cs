@@ -11,4 +11,27 @@ public class Cliente(string nome, string email, DateTime dataNascimento, string 
     public bool Ativo { get; set; } = true;
     public DateTime DataNascimento { get; set; } = dataNascimento;
     public DateTime DataInclusao { get; set; } = DateTime.Now;
+
+    public void Atualizar(
+        string nome,
+        string email,
+        string telefone,
+        string documento,
+        string observacao,
+        bool ativo,
+        DateTime dataNascimento)
+    {
+        Nome = nome;
+        Email = email;
+        Telefone = telefone;
+        Documento = documento;
+        Observacao = observacao;
+        Ativo = ativo;
+        DataNascimento = dataNascimento;
+    }
+
+    public void Desativar()
+    {
+        Ativo = false;
+    }
 }

@@ -43,8 +43,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             builder.HasKey(e => e.Id);
             builder.Property(e => e.NomeFantasia).HasMaxLength(150);
             builder.Property(e => e.RazaoSocial).HasMaxLength(150);
-            builder.Property(e => e.CNPJ).HasMaxLength(20);
-            builder.Property(e => e.IE).HasMaxLength(20);
+            builder.Property(e => e.Cnpj).HasMaxLength(20);
+            builder.Property(e => e.Ie).HasMaxLength(20);
 
             builder.HasMany(u => u.UsuarioUnidades)
                 .WithOne(uu => uu.Unidade)
