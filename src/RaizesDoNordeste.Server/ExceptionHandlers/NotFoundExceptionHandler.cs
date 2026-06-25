@@ -4,12 +4,14 @@ using RaizesDoNordeste.Domain.Exceptions;
 
 namespace RaizesDoNordeste.Server.ExceptionHandlers;
 
-internal sealed class NotFoundExceptionHandler(ILogger<NotFoundExceptionHandler> logger) : IExceptionHandler
+internal sealed class NotFoundExceptionHandler(
+    ILogger<NotFoundExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+        )
     {
         if (exception is not NotFoundException)
         {
@@ -18,13 +20,13 @@ internal sealed class NotFoundExceptionHandler(ILogger<NotFoundExceptionHandler>
 
         logger.LogWarning(exception, "Recurso não encontrado");
 
-        httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
         httpContext.Response.ContentType = "application/problem+json";
 
         await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
         {
-            Status = StatusCodes.Status401Unauthorized,
-            Title = "Não autorizado",
+            Status = StatusCodes.Status404NotFound,
+            Title = "Recurso não encontrado",
             Detail = exception.Message
         }, cancellationToken);
 

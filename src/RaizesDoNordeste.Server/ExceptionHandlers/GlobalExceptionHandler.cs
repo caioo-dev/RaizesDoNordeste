@@ -18,15 +18,10 @@ internal sealed class GlobalExceptionHandler(
 
         await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
         {
-            HttpContext = httpContext,
-            Exception = exception,
-            ProblemDetails = new ProblemDetails
-            {
-                Status = StatusCodes.Status500InternalServerError,
-                Title = "Erro interno do servidor",
-                Detail = "Ocorreu um erro inesperado. Tente novamente mais tarde."
-            }
-        });
+            Status = StatusCodes.Status500InternalServerError,
+            Title = "Erro interno do servidor",
+            Detail = "Ocorreu um erro inesperado. Tente novamente mais tarde."
+        }, cancellationToken);
 
         return true;
     }

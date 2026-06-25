@@ -5,7 +5,6 @@ using RaizesDoNordeste.Domain.Exceptions;
 namespace RaizesDoNordeste.Server.ExceptionHandlers;
 
 internal sealed class ConflictExceptionHandler(
-    IProblemDetailsService problemDetailsService,
     ILogger<ConflictExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
@@ -16,22 +15,20 @@ internal sealed class ConflictExceptionHandler(
         if (exception is not ConflictException)
         {
             return false;
-        }  
+        }
 
         logger.LogWarning(exception, "Conflito de recurso");
 
         httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
+        httpContext.Response.ContentType = "application/problem+json";
 
-        return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
+        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
         {
-            HttpContext = httpContext,
-            Exception = exception,
-            ProblemDetails = new ProblemDetails
-            {
-                Status = StatusCodes.Status409Conflict,
-                Title = "Conflito",
-                Detail = exception.Message
-            }
-        });
+            Status = StatusCodes.Status409Conflict,
+            Title = "Conflito",
+            Detail = exception.Message
+        }, cancellationToken);
+
+        return true;
     }
 }

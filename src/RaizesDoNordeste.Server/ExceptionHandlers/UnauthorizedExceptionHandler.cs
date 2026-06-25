@@ -4,7 +4,8 @@ using RaizesDoNordeste.Domain.Exceptions;
 
 namespace RaizesDoNordeste.Server.ExceptionHandlers;
 
-internal sealed class UnauthorizedExceptionHandler(ILogger<UnauthorizedExceptionHandler> logger) : IExceptionHandler
+internal sealed class UnauthorizedExceptionHandler(
+    ILogger<UnauthorizedExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
@@ -14,8 +15,8 @@ internal sealed class UnauthorizedExceptionHandler(ILogger<UnauthorizedException
         if (exception is not UnauthorizedException)
         {
             return false;
-        } 
-
+        }
+    
         logger.LogWarning(exception, "Tentativa de autenticação inválida");
 
         httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;

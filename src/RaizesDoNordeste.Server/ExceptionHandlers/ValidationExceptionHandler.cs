@@ -15,12 +15,9 @@ internal sealed class ValidationExceptionHandler(
         if (exception is not ValidationException validationException)
         {
             return false;
-        } 
+        }
 
         logger.LogWarning(exception, "Erro de validação");
-
-        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-        httpContext.Response.ContentType = "application/problem+json";
 
         var errors = validationException.Errors
             .GroupBy(e => e.PropertyName)
@@ -36,6 +33,9 @@ internal sealed class ValidationExceptionHandler(
         };
 
         problemDetails.Extensions.Add("errors", errors);
+
+        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+        httpContext.Response.ContentType = "application/problem+json";
 
         await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
