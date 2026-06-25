@@ -4,19 +4,19 @@ using RaizesDoNordeste.Domain.Exceptions;
 
 namespace RaizesDoNordeste.Server.ExceptionHandlers;
 
-internal sealed class NotFoundExceptionHandler(ILogger<NotFoundExceptionHandler> logger) : IExceptionHandler
+internal sealed class UnauthorizedExceptionHandler(ILogger<UnauthorizedExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
         CancellationToken cancellationToken)
     {
-        if (exception is not NotFoundException)
+        if (exception is not UnauthorizedException)
         {
             return false;
-        }
+        } 
 
-        logger.LogWarning(exception, "Recurso não encontrado");
+        logger.LogWarning(exception, "Tentativa de autenticação inválida");
 
         httpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
         httpContext.Response.ContentType = "application/problem+json";

@@ -10,4 +10,13 @@ public class Usuario
     public bool Ativo { get; set; } = true;
 
     public ICollection<UsuarioUnidade> UsuarioUnidades { get; } = [];
+
+    public Usuario(string nome, string email, string senhaHash)
+    {
+        Nome = nome;
+        Email = email;
+        SenhaHash = senhaHash;
+    }
+
+    private Usuario() { }
 }

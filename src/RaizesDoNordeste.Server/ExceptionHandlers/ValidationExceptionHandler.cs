@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace RaizesDoNordeste.Server.ExceptionHandlers;
 
 internal sealed class ValidationExceptionHandler(
-    IProblemDetailsService problemDetailsService,
     ILogger<ValidationExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
@@ -21,6 +20,13 @@ internal sealed class ValidationExceptionHandler(
         logger.LogWarning(exception, "Erro de validação");
 
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+        httpContext.Response.ContentType = "application/problem+json";
+
+        var errors = validationException.Errors
+            .GroupBy(e => e.PropertyName)
+            .ToDictionary(
+                g => g.Key,
+                g => g.Select(e => e.ErrorMessage).ToArray());
 
         var problemDetails = new ProblemDetails
         {
@@ -29,19 +35,10 @@ internal sealed class ValidationExceptionHandler(
             Detail = "Um ou mais erros de validação ocorreram."
         };
 
-        var errors = validationException.Errors
-            .GroupBy(e => e.PropertyName)
-            .ToDictionary(
-                g => g.Key,
-                g => g.Select(e => e.ErrorMessage).ToArray());
-
         problemDetails.Extensions.Add("errors", errors);
 
-        return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
-        {
-            HttpContext = httpContext,
-            Exception = exception,
-            ProblemDetails = problemDetails
-        });
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+
+        return true;
     }
 }

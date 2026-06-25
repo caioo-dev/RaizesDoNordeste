@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace RaizesDoNordeste.Server.ExceptionHandlers;
 
 internal sealed class GlobalExceptionHandler(
-    IProblemDetailsService problemDetailsService,
     ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
@@ -15,8 +14,9 @@ internal sealed class GlobalExceptionHandler(
         logger.LogError(exception, "Exceção não tratada");
 
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        httpContext.Response.ContentType = "application/problem+json";
 
-        return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
+        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
         {
             HttpContext = httpContext,
             Exception = exception,
@@ -27,5 +27,7 @@ internal sealed class GlobalExceptionHandler(
                 Detail = "Ocorreu um erro inesperado. Tente novamente mais tarde."
             }
         });
+
+        return true;
     }
 }
