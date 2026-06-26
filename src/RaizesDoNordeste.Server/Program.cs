@@ -5,6 +5,7 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using RaizesDoNordeste.Application.DTOs.Requests.Cliente;
 using RaizesDoNordeste.Application.Interfaces;
 using RaizesDoNordeste.Application.MapsterConfig;
@@ -30,7 +31,33 @@ internal sealed class Program
         builder.Services.AddValidatorsFromAssemblyContaining<CriarClienteRequestValidator>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "Insira o token JWT. Exemplo: Bearer {seu_token}"
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    []
+                }
+            });
+        });
 
         IConfigurationSection jwtSection = builder.Configuration.GetSection("Jwt");
         string secretKey = jwtSection["SecretKey"]!;
@@ -54,6 +81,8 @@ internal sealed class Program
 
         builder.Services.AddAuthorization();
 
+        builder.Services.AddScoped<ICardapioRepository, CardapioRepository>();
+        builder.Services.AddScoped<ICardapioService, CardapioService>();
         builder.Services.AddScoped<IClienteService, ClienteService>();
         builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
         builder.Services.AddScoped<IUnidadeRepository, UnidadeRepository>();
@@ -79,7 +108,7 @@ internal sealed class Program
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
-        { 
+        {
             app.UseSwagger();
             app.UseSwaggerUI();
         }

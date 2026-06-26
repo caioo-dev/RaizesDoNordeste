@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RaizesDoNordeste.Application.DTOs.Requests.Cliente;
 using RaizesDoNordeste.Application.DTOs.Responses.Cliente;
 using RaizesDoNordeste.Application.Interfaces;
@@ -7,6 +8,7 @@ namespace RaizesDoNordeste.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public sealed class ClienteController(IClienteService clienteService) : ControllerBase
 {
     [HttpPost]

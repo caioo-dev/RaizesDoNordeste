@@ -8,4 +8,5 @@ public interface IUnidadeRepository
     Task<IEnumerable<Unidade>> ObterTodos(CancellationToken cancellationToken);
     Task Criar(Unidade unidade, CancellationToken cancellationToken);
     Task Atualizar(Unidade unidade, CancellationToken cancellationToken);
+    Task<bool> ExistePorId(Guid id, CancellationToken cancellationToken);
 }

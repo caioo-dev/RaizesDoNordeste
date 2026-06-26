@@ -25,4 +25,8 @@ public class UnidadeRepository(AppDbContext context) : IUnidadeRepository
     public async Task Atualizar(Unidade unidade, CancellationToken cancellationToken)
         => await context.SaveChangesAsync(cancellationToken);
 
+    public async Task<bool> ExistePorId(Guid id, CancellationToken cancellationToken)
+    => await context.Unidades
+        .AnyAsync(u => u.Id == id && u.DataExclusao == null, cancellationToken);
+
 }

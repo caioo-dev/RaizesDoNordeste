@@ -1,5 +1,7 @@
 ﻿using Mapster;
+using RaizesDoNordeste.Application.DTOs.Requests.Cardapio;
 using RaizesDoNordeste.Application.DTOs.Requests.Cliente;
+using RaizesDoNordeste.Application.DTOs.Responses.Cardapio;
 using RaizesDoNordeste.Application.DTOs.Responses.Cliente;
 using RaizesDoNordeste.Domain.Entities;
 
@@ -24,5 +26,17 @@ public static class MapsterConfig
                 src.Telefone,
                 src.Observacao,
                 src.Documento));
+
+        TypeAdapterConfig<Cardapio, CardapioObterPorIdResponse>
+            .NewConfig();
+
+        TypeAdapterConfig<Cardapio, CardapioObterTodosModel>
+            .NewConfig();
+
+        TypeAdapterConfig<CardapioRequest, Cardapio>
+            .NewConfig()
+            .ConstructUsing(src => new Cardapio(
+                src.UnidadeId,
+                src.Nome));
     }
 }
