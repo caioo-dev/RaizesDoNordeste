@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RaizesDoNordeste.Application\RaizesDoNordeste.Application.csproj" />
+    <ProjectReference Include="..\RaizesDoNordeste.CrossCutting\RaizesDoNordeste.CrossCutting.csproj" />
     <ProjectReference Include="..\RaizesDoNordeste.Infrastructure\RaizesDoNordeste.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

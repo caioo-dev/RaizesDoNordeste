@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using RaizesDoNordeste.Domain.Exceptions;
+using RaizesDoNordeste.CrossCutting.Exceptions;
 
 namespace RaizesDoNordeste.Server.ExceptionHandlers;
 

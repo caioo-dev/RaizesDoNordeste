@@ -1,8 +1,8 @@
 ﻿using RaizesDoNordeste.Application.DTOs.Requests.CardapioProduto;
 using RaizesDoNordeste.Application.DTOs.Responses.CardapioProduto;
 using RaizesDoNordeste.Application.Interfaces;
+using RaizesDoNordeste.CrossCutting.Exceptions;
 using RaizesDoNordeste.Domain.Entities;
-using RaizesDoNordeste.Domain.Exceptions;
 using RaizesDoNordeste.Domain.Interfaces;
 
 namespace RaizesDoNordeste.Application.Services;

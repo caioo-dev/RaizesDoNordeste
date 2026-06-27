@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using RaizesDoNordeste.Application.DTOs.Requests.Cardapio;
 
-namespace RaizesDoNordeste.Application.Validators.Cardapio;
+namespace RaizesDoNordeste.Application.DTOs.Requests.Cardapio;
 
 public class CriarCardapioRequestValidator : AbstractValidator<CardapioRequest>
 {

@@ -1,4 +1,4 @@
-﻿namespace RaizesDoNordeste.Domain.Exceptions;
+﻿namespace RaizesDoNordeste.CrossCutting.Exceptions;
 
 public class NotFoundException : Exception
 {
