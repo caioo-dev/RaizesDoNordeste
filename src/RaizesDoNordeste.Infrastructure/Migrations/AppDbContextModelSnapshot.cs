@@ -651,7 +651,7 @@ namespace RaizesDoNordeste.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("RaizesDoNordeste.Domain.ValueObjects.EnderecoEntrega", "EnderecoEntrega", b1 =>
+                    b.OwnsOne("RaizesDoNordeste.Domain.Entities.Pedido.EnderecoEntrega#RaizesDoNordeste.Domain.ValueObjects.EnderecoEntrega", "EnderecoEntrega", b1 =>
                         {
                             b1.Property<Guid>("PedidoId")
                                 .HasColumnType("uniqueidentifier");
@@ -682,7 +682,7 @@ namespace RaizesDoNordeste.Infrastructure.Migrations
 
                             b1.HasKey("PedidoId");
 
-                            b1.ToTable("Pedidos");
+                            b1.ToTable("Pedidos", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PedidoId");

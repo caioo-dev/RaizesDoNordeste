@@ -22,9 +22,10 @@ public static class InfrastructureServicesExtensions
         services.AddScoped<IUnidadeRepository, UnidadeRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
         services.AddScoped<ICardapioRepository, CardapioRepository>();
-        services.AddScoped<ICardapioProdutoRepository, CardapioProdutoRepository>();
+        services.AddScoped<IReservaEstoqueRepository, ReservaEstoqueRepository>();
         services.AddScoped<IProdutoUnidadeRepository, ProdutoUnidadeRepository>();
         services.AddScoped<IUsuarioUnidadeRepository, UsuarioUnidadeRepository>();
+        services.AddScoped<ICardapioProdutoRepository, CardapioProdutoRepository>();
 
         services.AddScoped<IMapper, Mapper>();
 

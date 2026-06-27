@@ -16,9 +16,10 @@ public static class ApplicationServicesExtensions
         services.AddScoped<IUnidadeService, UnidadeService>();
         services.AddScoped<IProdutoService, ProdutoService>();
         services.AddScoped<ICardapioService, CardapioService>();
-        services.AddScoped<ICardapioProdutoService, CardapioProdutoService>();
         services.AddScoped<IProdutoUnidadeService, ProdutoUnidadeService>();
         services.AddScoped<IUsuarioUnidadeService, UsuarioUnidadeService>();
+        services.AddScoped<IReservaEstoqueService, ReservaEstoqueService>();
+        services.AddScoped<ICardapioProdutoService, CardapioProdutoService>();
 
         return services;
     }

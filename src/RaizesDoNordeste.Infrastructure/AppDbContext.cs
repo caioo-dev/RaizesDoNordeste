@@ -304,7 +304,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
             builder.Property(e => e.Quantidade).HasPrecision(18, 4);
             builder.Property(e => e.TipoMovimentacaoOrigem).HasConversion<string>();
-            builder.Property(e => e.Status).HasMaxLength(50);
+            builder.Property(e => e.Status)
+                .HasConversion<string>()
+                .HasMaxLength(50);
         });
 
         modelBuilder.Entity<PedidoStatusHistorico>(builder =>
