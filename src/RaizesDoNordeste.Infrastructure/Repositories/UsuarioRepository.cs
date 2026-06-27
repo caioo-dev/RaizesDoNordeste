@@ -19,4 +19,8 @@ public class UsuarioRepository(AppDbContext context) : IUsuarioRepository
         await context.Usuarios.AddAsync(usuario, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<bool> ExistePorId(Guid id, CancellationToken cancellationToken)
+    => await context.Usuarios
+        .AnyAsync(u => u.Id == id && u.Ativo, cancellationToken);
 }

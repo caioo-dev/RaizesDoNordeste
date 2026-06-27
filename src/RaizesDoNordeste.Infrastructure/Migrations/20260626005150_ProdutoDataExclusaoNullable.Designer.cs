@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RaizesDoNordeste.Infrastructure;
 
@@ -11,9 +12,11 @@ using RaizesDoNordeste.Infrastructure;
 namespace RaizesDoNordeste.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260626005150_ProdutoDataExclusaoNullable")]
+    partial class ProdutoDataExclusaoNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -391,7 +394,7 @@ namespace RaizesDoNordeste.Infrastructure.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("DataExclusao")
+                    b.Property<DateTime>("DataExclusao")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataInclusao")

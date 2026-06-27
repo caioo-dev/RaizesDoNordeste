@@ -24,4 +24,8 @@ public class CardapioRepository(AppDbContext context) : ICardapioRepository
 
     public async Task Salvar(Cardapio cardapio, CancellationToken cancellationToken)
         => await context.SaveChangesAsync(cancellationToken);
+
+    public async Task<bool> ExistePorId(Guid id, CancellationToken cancellationToken)
+    => await context.Cardapios
+        .AnyAsync(c => c.Id == id && c.DataExclusao == null, cancellationToken);
 }

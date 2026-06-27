@@ -19,7 +19,4 @@
     <ProjectReference Include="..\RaizesDoNordeste.Application\RaizesDoNordeste.Application.csproj" />
     <ProjectReference Include="..\RaizesDoNordeste.Infrastructure\RaizesDoNordeste.Infrastructure.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DependencyInjections\" />
-  </ItemGroup>
 </Project>

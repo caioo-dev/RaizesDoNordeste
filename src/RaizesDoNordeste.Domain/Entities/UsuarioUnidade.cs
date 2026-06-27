@@ -2,11 +2,19 @@
 
 public class UsuarioUnidade
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; private set; } = Guid.NewGuid();
 
-    public Guid UsuarioId { get; set; }
-    public Usuario Usuario { get; set; } = null!;
+    public Guid UsuarioId { get; private set; }
+    public Usuario Usuario { get; private set; } = null!;
 
-    public Guid UnidadeId { get; set; }
-    public Unidade Unidade { get; set; } = null!;
+    public Guid UnidadeId { get; private set; }
+    public Unidade Unidade { get; private set; } = null!;
+
+    public UsuarioUnidade(Guid usuarioId, Guid unidadeId)
+    {
+        UsuarioId = usuarioId;
+        UnidadeId = unidadeId;
+    }
+
+    protected UsuarioUnidade() { }
 }

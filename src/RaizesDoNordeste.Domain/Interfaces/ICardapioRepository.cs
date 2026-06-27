@@ -8,4 +8,5 @@ public interface ICardapioRepository
     Task<IEnumerable<Cardapio>> ObterTodos(CancellationToken cancellationToken);
     Task Criar(Cardapio cardapio, CancellationToken cancellationToken);
     Task Salvar(Cardapio cardapio, CancellationToken cancellationToken);
+    Task<bool> ExistePorId(Guid id, CancellationToken cancellationToken);
 }
