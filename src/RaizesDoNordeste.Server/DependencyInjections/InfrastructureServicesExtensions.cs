@@ -17,15 +17,20 @@ public static class InfrastructureServicesExtensions
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IPedidoRepository, PedidoRepository>();
         services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         services.AddScoped<IClienteRepository, ClienteRepository>();
         services.AddScoped<IUnidadeRepository, UnidadeRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
         services.AddScoped<ICardapioRepository, CardapioRepository>();
+        services.AddScoped<ILogOperacaoRepository, LogOperacaoRepository>();
         services.AddScoped<IReservaEstoqueRepository, ReservaEstoqueRepository>();
         services.AddScoped<IProdutoUnidadeRepository, ProdutoUnidadeRepository>();
         services.AddScoped<IUsuarioUnidadeRepository, UsuarioUnidadeRepository>();
+        services.AddScoped<IPedidoPagamentoRepository, PedidoPagamentoRepository>();
         services.AddScoped<ICardapioProdutoRepository, CardapioProdutoRepository>();
+        services.AddScoped<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
+        services.AddScoped<IPedidoStatusHistoricoRepository, PedidoStatusHistoricoRepository>();
 
         services.AddScoped<IMapper, Mapper>();
 

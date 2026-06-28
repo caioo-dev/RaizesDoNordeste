@@ -33,4 +33,8 @@ public class ProdutoUnidadeRepository(AppDbContext context) : IProdutoUnidadeRep
 
     public async Task Excluir(ProdutoUnidade produtoUnidade, CancellationToken cancellationToken)
         => await context.SaveChangesAsync(cancellationToken);
+
+    public async Task<ProdutoUnidade?> ObterPorProdutoEUnidade(Guid produtoId, Guid unidadeId, CancellationToken cancellationToken)
+    => await context.ProdutosUnidades
+        .FirstOrDefaultAsync(pu => pu.ProdutoID == produtoId && pu.UnidadeID == unidadeId && pu.DataExclusao == null, cancellationToken);
 }

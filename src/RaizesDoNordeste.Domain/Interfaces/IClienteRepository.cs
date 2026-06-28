@@ -8,4 +8,5 @@ public interface IClienteRepository
     Task<Cliente?> ObterPorId(Guid id, CancellationToken cancellationToken);
     Task<IEnumerable<Cliente>> ObterTodos(CancellationToken cancellationToken);
     Task Atualizar(Cliente cliente, CancellationToken cancellationToken);
+    Task<bool> ExistePorId(Guid id, CancellationToken cancellationToken);
 }

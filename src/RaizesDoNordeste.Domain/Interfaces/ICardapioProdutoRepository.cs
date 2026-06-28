@@ -10,4 +10,5 @@ public interface ICardapioProdutoRepository
     Task Criar(CardapioProduto cardapioProduto, CancellationToken cancellationToken);
     Task Atualizar(CardapioProduto cardapioProduto, CancellationToken cancellationToken);
     Task Excluir(CardapioProduto cardapioProduto, CancellationToken cancellationToken);
+    Task<CardapioProduto?> ObterPorCardapioEProduto(Guid cardapioId, Guid produtoId, CancellationToken cancellationToken);
 }

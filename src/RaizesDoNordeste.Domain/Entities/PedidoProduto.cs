@@ -18,5 +18,17 @@ public class PedidoProduto
 
     public decimal ValorTotal { get; set; }
 
-    public DateTime DataInclusao { get; set; } = DateTime.UtcNow;
+    public DateTime DataInclusao { get; set; } = DateTime.UtcNow;   
+
+    public PedidoProduto(Guid pedidoId, Guid produtoId, decimal precoUnitario, decimal quantidade)
+    {
+        PedidoId = pedidoId;
+        ProdutoId = produtoId;
+        PrecoUnitario = precoUnitario;
+        Quantidade = quantidade;
+        ValorTotal = precoUnitario * quantidade;
+    }
+
+    // EF Core
+    protected PedidoProduto() { }
 }

@@ -33,4 +33,7 @@ public class ProdutoUnidade
         Ativo = false;
         DataExclusao = DateTime.UtcNow;
     }
+
+    public void AtualizarEstoque(decimal novoSaldo) => 
+        EstoqueDisponivel = novoSaldo;
 }

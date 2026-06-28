@@ -10,4 +10,5 @@ public interface IProdutoUnidadeRepository
     Task Criar(ProdutoUnidade produtoUnidade, CancellationToken cancellationToken);
     Task Atualizar(ProdutoUnidade produtoUnidade, CancellationToken cancellationToken);
     Task Excluir(ProdutoUnidade produtoUnidade, CancellationToken cancellationToken);
+    Task<ProdutoUnidade?> ObterPorProdutoEUnidade(Guid produtoId, Guid unidadeId, CancellationToken cancellationToken);
 }

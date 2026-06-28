@@ -4,13 +4,15 @@ using RaizesDoNordeste.Application.DTOs.Responses.Produto;
 using RaizesDoNordeste.Application.Interfaces;
 using RaizesDoNordeste.CrossCutting.Exceptions;
 using RaizesDoNordeste.Domain.Entities;
+using RaizesDoNordeste.Domain.Enums;
 using RaizesDoNordeste.Domain.Interfaces;
 
 namespace RaizesDoNordeste.Application.Services;
 
 public class ProdutoService(
     IProdutoRepository produtoRepository,
-    IMapper mapper) : IProdutoService
+    IMapper mapper,
+    ILogOperacaoService logOperacaoService) : IProdutoService
 {
     public async Task<ProdutoObterPorIdResponse?> ObterPorId(Guid id, CancellationToken cancellationToken)
     {
@@ -37,6 +39,8 @@ public class ProdutoService(
     {
         Produto produto = mapper.Map<Produto>(request);
         await produtoRepository.Criar(produto, cancellationToken);
+
+        await logOperacaoService.Registrar(produto.Id, TipoAcaoLog.Criacao, produto, cancellationToken);
     }
 
     public async Task Atualizar(Guid id, ProdutoRequest request, CancellationToken cancellationToken)
@@ -47,6 +51,8 @@ public class ProdutoService(
         produto.Atualizar(request.Nome, request.Ativo);
 
         await produtoRepository.Atualizar(produto, cancellationToken);
+
+        await logOperacaoService.Registrar(produto.Id, TipoAcaoLog.Atualizacao, produto, cancellationToken);
     }
 
     public async Task Excluir(Guid id, CancellationToken cancellationToken)
@@ -57,5 +63,7 @@ public class ProdutoService(
         produto.Excluir();
 
         await produtoRepository.Excluir(produto, cancellationToken);
+
+        await logOperacaoService.Registrar(produto.Id, TipoAcaoLog.Exclusao, produto, cancellationToken);
     }
 }

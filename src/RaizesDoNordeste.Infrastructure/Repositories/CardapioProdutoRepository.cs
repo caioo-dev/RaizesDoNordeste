@@ -36,4 +36,7 @@ public class CardapioProdutoRepository(AppDbContext context) : ICardapioProdutoR
         context.CardapiosProdutos.Remove(cardapioProduto);
         await context.SaveChangesAsync(cancellationToken);
     }
+    public async Task<CardapioProduto?> ObterPorCardapioEProduto(Guid cardapioId, Guid produtoId, CancellationToken cancellationToken)
+    => await context.CardapiosProdutos
+        .FirstOrDefaultAsync(cp => cp.CardapioId == cardapioId && cp.ProdutoId == produtoId, cancellationToken);
 }
