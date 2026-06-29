@@ -29,6 +29,8 @@ public static class InfrastructureServicesExtensions
         services.AddScoped<IUsuarioUnidadeRepository, UsuarioUnidadeRepository>();
         services.AddScoped<IPedidoPagamentoRepository, PedidoPagamentoRepository>();
         services.AddScoped<ICardapioProdutoRepository, CardapioProdutoRepository>();
+        services.AddScoped<IMovimentacaoPontoRepository, MovimentacaoPontoRepository>();
+        services.AddScoped<IClienteFidelizacaoRepository, ClienteFidelizacaoRepository>();
         services.AddScoped<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
         services.AddScoped<IPedidoStatusHistoricoRepository, PedidoStatusHistoricoRepository>();
 

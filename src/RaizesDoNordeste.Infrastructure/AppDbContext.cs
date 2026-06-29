@@ -343,9 +343,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             builder.Property(e => e.DadosJson).IsRequired().HasColumnType("nvarchar(max)");
             builder.Property(e => e.Acao).HasConversion<string>();
         });
+    }
 
 #pragma warning restore IDE0022 // Usar o corpo da expressão para método
-    }
+
 
     public DbSet<Usuario> Usuarios => Set<Usuario>();
     public DbSet<Cliente> Clientes => Set<Cliente>();
@@ -362,4 +363,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<ReservaEstoque> ReservasEstoque => Set<ReservaEstoque>();
     public DbSet<PedidoStatusHistorico> PedidosStatusHistorico => Set<PedidoStatusHistorico>();
     public DbSet<LogOperacao> LogsOperacao => Set<LogOperacao>();
+    public DbSet<ClienteFidelizacao> ClientesFidelizacao { get; set; } = null!;
+    public DbSet<MovimentacaoPonto> MovimentacoesPontos { get; set; } = null!;
 }

@@ -12,6 +12,8 @@ public class Cliente
     public DateTime DataNascimento { get; set; }
     public DateTime DataInclusao { get; set; } = DateTime.Now;
 
+    public ClienteFidelizacao ClienteFidelizacao { get; private set; } = null!;
+
     public Cliente(string nome, string email, DateTime dataNascimento, string telefone, string observacao, string documento)
     {
         Nome = nome;

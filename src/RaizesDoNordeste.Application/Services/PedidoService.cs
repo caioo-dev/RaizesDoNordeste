@@ -14,7 +14,8 @@ public class PedidoService(
     IClienteRepository clienteRepository,
     IUnidadeRepository unidadeRepository,
     ICardapioProdutoRepository cardapioProdutoRepository,
-    IPedidoStatusHistoricoService pedidoStatusHistoricoService) : IPedidoService
+    IPedidoStatusHistoricoService pedidoStatusHistoricoService,
+    IClienteFidelizacaoRepository clienteFidelizacaoRepository) : IPedidoService
 {
     public async Task<PedidoObterPorIdResponse?> ObterPorId(Guid id, CancellationToken cancellationToken)
     {
@@ -78,9 +79,18 @@ public class PedidoService(
             pedido.PedidosProdutos.Add(pedidoProduto);
         }
 
-        pedido.CalcularTotal();
+        pedido.CalcularTotal(); 
 
         await pedidoRepository.Criar(pedido, cancellationToken);
+
+        ClienteFidelizacao? fidelizacao = await clienteFidelizacaoRepository
+            .ObterPorClienteId(request.ClienteId, cancellationToken);
+
+        if (fidelizacao is not null && fidelizacao.ConsentimentoLGPD)
+        {
+            fidelizacao.AcumularPontos(pedido.Total, $"Compra do pedido #{pedido.Id}");
+            await clienteFidelizacaoRepository.Atualizar(fidelizacao, cancellationToken);
+        }
     }
 
     public async Task Confirmar(Guid id, Guid usuarioId, CancellationToken cancellationToken)

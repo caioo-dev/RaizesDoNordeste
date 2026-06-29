@@ -24,6 +24,7 @@ public static class ApplicationServicesExtensions
         services.AddScoped<IReservaEstoqueService, ReservaEstoqueService>();
         services.AddScoped<ICardapioProdutoService, CardapioProdutoService>();
         services.AddScoped<IPedidoPagamentoService, PedidoPagamentoService>();
+        services.AddScoped<IClienteFidelizacaoService, ClienteFidelizacaoService>();
         services.AddScoped<IMovimentacaoEstoqueService, MovimentacaoEstoqueService>();
         services.AddScoped<IPedidoStatusHistoricoService, PedidoStatusHistoricoService>();
 
